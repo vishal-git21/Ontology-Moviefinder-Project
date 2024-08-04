@@ -1,0 +1,133 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ont: <http://www.semanticweb.org/owl/owlapi/turtle#>
+PREFIX inst: <http://www.co-ode.org/ontologies/ont.owl#>
+
+
+Query 1: 
+
+SELECT ?actor
+WHERE {
+  ?actor rdf:type ont:Actor.
+}
+
+Query 2:
+
+SELECT ?writer
+WHERE {
+  ?writer rdf:type ont:writer.
+}
+
+Query 3:
+
+SELECT ?director
+WHERE {
+  ?director rdf:type ont:director.
+}
+
+Query 4:
+
+SELECT ?movie_label ?director ?director_label
+WHERE {
+?movie rdf:type ont: Movie ;
+ont: hasGenre inst: Thriller;
+rdfs:label ?movie_label;
+ont:hasDirector ? director
+?director rdfs:label ?director_label.
+}
+
+Query 5:
+
+SELECT ?movie_label
+WHERE { 
+?movie  rdf:type ont: Movie;
+	ont:hasGenre inst: Crime, inst: Thriller ; 	rdfs:label ?movie_label }
+
+
+Query 6:
+SELECT ? actor_label ?movie_label
+WHERE {
+?movie rdf:type ont: Movie ; ont: hasActor Pactor; rdfs:label ?movie_label. ?actor ont:hasGender "Male"; rdfs:label ?actor_label.
+FILTER (?movie_label = "Pulp Fiction").
+}
+
+Query 7:
+SELECT (COUNT(?movie) as ?count)
+WHERE {
+?movie rdf:type ont: Movie.
+?movie ont:hasGenre ont: Action.
+?movie ont: hasGenre ont: Thriller.
+}
+
+
+Query 8:
+SELECT ?movie ?movie_label
+WHERE {
+?movie rdf:type ont: Movie;
+ont:haswriter inst: Quentin_Tarantino ;
+rdfs:label ?movie_label.
+}
+
+Query 9:
+SELECT ?movie ?movie_label
+WHERE {
+?movie rdf:type ont: Movie ; ont:has Language "English"; rdfs:label ?movie_label.
+}
+
+Query 10:
+SELECT Pactor
+- WHERE {
+?actor rdf:type ont: Actor;
+ont:hasAge ?age;
+rdfs:label ? actor_label.
+FILTER (?age > 51)
+}
+
+
+Query 11:
+SELECT ?movie
+WHERE {
+?actor rdf:type ont: Actor;
+ont:isActorof?movie.
+OPTIONAL { ? movie ont:hasLanguage ?language. }
+OPTIONAL { ? movie ont:hasCountry ? country. }
+OPTIONAL {FILTER (?country ="USA").}
+OPTIONAL {FILTER (?language="English")}
+}
+
+Query 12:
+   
+SELECT DISTINCT ?name
+WHERE{
+  {?person ont:isActorOf|ont:isDirectorOf ?movie;
+         rdfs:label ?name.
+    ?movie rdfs:label "Pulp Fiction".}
+  UNION{
+    ?person ont:isWriterOf ?another_movie;
+            rdfs:label ?name.
+    ?another_movie rdfs:label "Kill Bill vol1".
+  }
+ 
+Query 13:
+CONSTRUCT {
+  ?movie rdf:type ont:Movie .
+  ?movie ont:hasDirector ?director .
+}
+WHERE {
+  ?movie rdf:type ont:Movie .
+  ?movie ont:hasDirector ?director .
+}
+
+Query 14:
+ASK {
+  ?movie rdf:type ont:Movie .
+  ?movie ont:hasGenre ont:Thriller .
+}
+
+Query 15:
+
+DESCRIBE ?movie
+WHERE {
+  ?movie rdf:type ont:Movie .
+  ?movie ont:hasGenre ont:Action .
+}

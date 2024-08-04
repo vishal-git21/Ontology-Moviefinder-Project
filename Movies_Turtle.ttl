@@ -1,0 +1,427 @@
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/owl/owlapi/turtle#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasActor
+:hasActor rdf:type owl:ObjectProperty ;
+          owl:inverseOf :isActorOf ;
+          rdfs:domain :Movie ;
+          rdfs:range :Actor .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasDirector
+:hasDirector rdf:type owl:ObjectProperty ;
+             owl:inverseOf :isDirectorOf ;
+             rdfs:domain :Movie ;
+             rdfs:range :Director .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasGenre
+:hasGenre rdf:type owl:ObjectProperty ;
+          rdfs:domain :Movie ;
+          rdfs:range :Genre .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasWriter
+:hasWriter rdf:type owl:ObjectProperty ;
+           owl:inverseOf :isWriterOf ;
+           rdfs:domain :Movie ;
+           rdfs:range :Writer .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#isActorOf
+:isActorOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#isDirectorOf
+:isDirectorOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#isWriterOf
+:isWriterOf rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasAge
+:hasAge rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Person ;
+        rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasCountry
+:hasCountry rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Movie ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasGender
+:hasGender rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasLanguage
+:hasLanguage rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Movie ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Person ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasNationality
+:hasNationality rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Person ;
+                rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Movie ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#hasYear
+:hasYear rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Movie ;
+         rdfs:range xsd:integer .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Actor
+:Actor rdf:type owl:Class ;
+       rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Director
+:Director rdf:type owl:Class ;
+          rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Genre
+:Genre rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Movie
+:Movie rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasActor ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Movie
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasDirector ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Movie
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasWriter ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Movie
+                           ] .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Person
+:Person rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#Writer
+:Writer rdf:type owl:Class ;
+        rdfs:subClassOf :Person .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#Action
+<http://www.co-ode.org/ontologies/ont.owl#Action> rdf:type owl:NamedIndividual ,
+                                                           :Genre .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Baby_Driver
+<http://www.co-ode.org/ontologies/ont.owl#Baby_Driver> rdf:type owl:NamedIndividual ,
+                                                                :Movie ;
+                                                       :hasActor <http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> ;
+                                                       :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> ;
+                                                       :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> ;
+                                                       rdfs:label "Baby Driver" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Boogie_Nights
+<http://www.co-ode.org/ontologies/ont.owl#Boogie_Nights> rdf:type owl:NamedIndividual ,
+                                                                  :Movie ;
+                                                         :hasActor <http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> ;
+                                                         :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> ;
+                                                         :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> ;
+                                                         rdfs:label "Boogie Nights" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Brittany_Kaiser
+<http://www.co-ode.org/ontologies/ont.owl#Brittany_Kaiser> rdf:type owl:NamedIndividual ,
+                                                                    :Actor ,
+                                                                    :Person ;
+                                                           :isActorOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                           rdfs:label "Brittany Kaiser" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Carole_Cadwalladr
+<http://www.co-ode.org/ontologies/ont.owl#Carole_Cadwalladr> rdf:type owl:NamedIndividual ,
+                                                                      :Actor ,
+                                                                      :Person ;
+                                                             :isActorOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                             rdfs:label "Carole Cadwalladr" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Comedy
+<http://www.co-ode.org/ontologies/ont.owl#Comedy> rdf:type owl:NamedIndividual ,
+                                                           :Genre .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Crime
+<http://www.co-ode.org/ontologies/ont.owl#Crime> rdf:type owl:NamedIndividual ,
+                                                          :Genre .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Damien_Chazelle
+<http://www.co-ode.org/ontologies/ont.owl#Damien_Chazelle> rdf:type owl:NamedIndividual ,
+                                                                    :Director ,
+                                                                    :Person ,
+                                                                    :Writer ;
+                                                           :isDirectorOf <http://www.co-ode.org/ontologies/ont.owl#La_La_Land> ;
+                                                           :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#La_La_Land> ;
+                                                           :hasCountry "USA" ;
+                                                           :hasLanguage "English" ;
+                                                           :hasYear 2016 ;
+                                                           rdfs:label "Damien Chazelle" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#David_Carroll
+<http://www.co-ode.org/ontologies/ont.owl#David_Carroll> rdf:type owl:NamedIndividual ,
+                                                                  :Actor ,
+                                                                  :Person ;
+                                                         :isActorOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                         rdfs:label "David Carroll" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Drama
+<http://www.co-ode.org/ontologies/ont.owl#Drama> rdf:type owl:NamedIndividual ,
+                                                          :Genre .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright
+<http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> rdf:type owl:NamedIndividual ,
+                                                                 :Actor ,
+                                                                 :Director ,
+                                                                 :Person ,
+                                                                 :Writer ;
+                                                        :isActorOf <http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1> ,
+                                                                   <http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> ;
+                                                        :hasGender "Male" ;
+                                                        rdfs:label "Edgar Wright" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Erin_Barnett
+<http://www.co-ode.org/ontologies/ont.owl#Erin_Barnett> rdf:type owl:NamedIndividual ,
+                                                                 :Person ,
+                                                                 :Writer ;
+                                                        :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                        rdfs:label "Erin Barnett" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Jehane_Noujaim
+<http://www.co-ode.org/ontologies/ont.owl#Jehane_Noujaim> rdf:type owl:NamedIndividual ,
+                                                                   :Director ,
+                                                                   :Person ;
+                                                          :isDirectorOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                          rdfs:label "Jehane Noujaim" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#John_Travolta
+<http://www.co-ode.org/ontologies/ont.owl#John_Travolta> rdf:type owl:NamedIndividual ,
+                                                                  :Actor ,
+                                                                  :Person ;
+                                                         :isActorOf <http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> ;
+                                                         :hasGender "Male" ;
+                                                         rdfs:label "John Travolta" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Jojo_Rabbit
+<http://www.co-ode.org/ontologies/ont.owl#Jojo_Rabbit> rdf:type owl:NamedIndividual ,
+                                                                :Movie ;
+                                                       :hasActor <http://www.co-ode.org/ontologies/ont.owl#Taika_Waititi> ;
+                                                       :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Taika_Waititi> ;
+                                                       rdfs:label "Jojo Rabbit" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Karim_Amer
+<http://www.co-ode.org/ontologies/ont.owl#Karim_Amer> rdf:type owl:NamedIndividual ,
+                                                               :Director ,
+                                                               :Person ,
+                                                               :Writer ;
+                                                      :isDirectorOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                      :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                      rdfs:label "Karim Amer" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1
+<http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1> rdf:type owl:NamedIndividual ,
+                                                                   :Movie ;
+                                                          :hasActor <http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> ;
+                                                          :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> ;
+                                                          :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> ,
+                                                                     <http://www.co-ode.org/ontologies/ont.owl#Uma_Thurman> ;
+                                                          rdfs:label "Kill Bill vol1" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#La_La_Land
+<http://www.co-ode.org/ontologies/ont.owl#La_La_Land> rdf:type owl:NamedIndividual ,
+                                                               :Movie ;
+                                                      :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Damien_Chazelle> ;
+                                                      :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Damien_Chazelle> ;
+                                                      rdfs:label "La La Land" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson
+<http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> rdf:type owl:NamedIndividual ,
+                                                                         :Actor ,
+                                                                         :Director ,
+                                                                         :Person ,
+                                                                         :Writer ;
+                                                                :isActorOf <http://www.co-ode.org/ontologies/ont.owl#Boogie_Nights> ,
+                                                                           <http://www.co-ode.org/ontologies/ont.owl#There_Will_Be_Blood> ;
+                                                                :isDirectorOf <http://www.co-ode.org/ontologies/ont.owl#Boogie_Nights> ,
+                                                                              <http://www.co-ode.org/ontologies/ont.owl#There_Will_Be_Blood> ;
+                                                                :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#Boogie_Nights> ,
+                                                                            <http://www.co-ode.org/ontologies/ont.owl#There_Will_Be_Blood> ;
+                                                                :hasAge 51 ;
+                                                                :hasGender "Male" ;
+                                                                :hasNationality "American" ;
+                                                                rdfs:label "Paul Thomas Anderson" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Pedro_Kos
+<http://www.co-ode.org/ontologies/ont.owl#Pedro_Kos> rdf:type owl:NamedIndividual ,
+                                                              :Person ,
+                                                              :Writer ;
+                                                     :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> ;
+                                                     rdfs:label "Pedro Kos" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction
+<http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> rdf:type owl:NamedIndividual ,
+                                                                 :Movie ;
+                                                        :hasActor <http://www.co-ode.org/ontologies/ont.owl#John_Travolta> ,
+                                                                  <http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> ,
+                                                                  <http://www.co-ode.org/ontologies/ont.owl#Uma_Thurman> ;
+                                                        :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> ;
+                                                        :hasGenre <http://www.co-ode.org/ontologies/ont.owl#Crime> ,
+                                                                  <http://www.co-ode.org/ontologies/ont.owl#Thriller> ;
+                                                        :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> ;
+                                                        :hasCountry "USA" ;
+                                                        :hasLanguage "English" ;
+                                                        :hasYear 1994 ;
+                                                        rdfs:label "Pulp Fiction" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino
+<http://www.co-ode.org/ontologies/ont.owl#Quentin_Tarantino> rdf:type owl:NamedIndividual ,
+                                                                      :Actor ,
+                                                                      :Director ,
+                                                                      :Person ,
+                                                                      :Writer ;
+                                                             :isActorOf <http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1> ,
+                                                                        <http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> ;
+                                                             :isDirectorOf <http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1> ,
+                                                                           <http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> ;
+                                                             :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1> ,
+                                                                         <http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> ;
+                                                             :hasGender "Male" ;
+                                                             rdfs:label "Quentin Tarantino" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Shaun_of_the_Dead
+<http://www.co-ode.org/ontologies/ont.owl#Shaun_of_the_Dead> rdf:type owl:NamedIndividual ,
+                                                                      :Movie ;
+                                                             :hasActor <http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> ;
+                                                             :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> ;
+                                                             :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Edgar_Wright> ;
+                                                             rdfs:label "Shaun of the Dead" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Taika_Waititi
+<http://www.co-ode.org/ontologies/ont.owl#Taika_Waititi> rdf:type owl:NamedIndividual ,
+                                                                  :Actor ,
+                                                                  :Director ,
+                                                                  :Person ;
+                                                         :isActorOf <http://www.co-ode.org/ontologies/ont.owl#Jojo_Rabbit> ,
+                                                                    <http://www.co-ode.org/ontologies/ont.owl#Thor:_Ragnarok> ;
+                                                         :isDirectorOf <http://www.co-ode.org/ontologies/ont.owl#Jojo_Rabbit> ,
+                                                                       <http://www.co-ode.org/ontologies/ont.owl#Thor:_Ragnarok> ;
+                                                         rdfs:label "Taika Waititi" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack
+<http://www.co-ode.org/ontologies/ont.owl#The_Great_Hack> rdf:type owl:NamedIndividual ,
+                                                                   :Movie ;
+                                                          :hasActor <http://www.co-ode.org/ontologies/ont.owl#Brittany_Kaiser> ,
+                                                                    <http://www.co-ode.org/ontologies/ont.owl#Carole_Cadwalladr> ,
+                                                                    <http://www.co-ode.org/ontologies/ont.owl#David_Carroll> ;
+                                                          :hasYear 2019 ;
+                                                          rdfs:label "The Great Hack" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#There_Will_Be_Blood
+<http://www.co-ode.org/ontologies/ont.owl#There_Will_Be_Blood> rdf:type owl:NamedIndividual ,
+                                                                        :Movie ;
+                                                               :hasActor <http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> ;
+                                                               :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> ;
+                                                               :hasWriter <http://www.co-ode.org/ontologies/ont.owl#Paul_Thomas_Anderson> ;
+                                                               rdfs:label "There will be blood" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Thriller
+<http://www.co-ode.org/ontologies/ont.owl#Thriller> rdf:type owl:NamedIndividual ,
+                                                             :Genre .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Uma_Thurman
+<http://www.co-ode.org/ontologies/ont.owl#Uma_Thurman> rdf:type owl:NamedIndividual ,
+                                                                :Actor ,
+                                                                :Person ,
+                                                                :Writer ;
+                                                       :isActorOf <http://www.co-ode.org/ontologies/ont.owl#Pulp_Fiction> ;
+                                                       :isWriterOf <http://www.co-ode.org/ontologies/ont.owl#Kill_Bill_vol1> ;
+                                                       :hasGender "Female" ;
+                                                       rdfs:label "Uma Thurman" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Thor:_Ragnarok
+<http://www.co-ode.org/ontologies/ont.owl#Thor:_Ragnarok> rdf:type owl:NamedIndividual ,
+                                                                   :Movie ;
+                                                          :hasActor <http://www.co-ode.org/ontologies/ont.owl#Taika_Waititi> ;
+                                                          :hasDirector <http://www.co-ode.org/ontologies/ont.owl#Taika_Waititi> ;
+                                                          rdfs:label "Thor" .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
